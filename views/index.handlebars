@@ -1,0 +1,56 @@
+<div class="row"> <!-- row for eat da burger heading -->
+  <h1 class="text-center">Eat-da-Burger</h1>
+</div> <!-- row for eat da burger heading -->
+
+<div class="row"> <!-- row for burger pic -->
+  <img class="center-block" id="headerPic" src="assets/img/burger.png">
+</div>
+
+<div class="container"> <!-- container for whole page -->
+  <div class="row text-center"> <!-- row for list of  burgers -->
+    <div class="col-sm-6"> <!-- column for available burgers -->
+
+      <h3> AVAILABLE BURGERS </h3>
+      <ul style="list-style: none">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+
+            <li>
+              {{this.id}} <span>.</span> {{this.burger_name}}
+
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devoured" value="true">
+                <button type="submit">EAT IT</button>
+              </form>
+
+            </li>
+          {{/unless}}
+        {{/each}}
+      </ul>
+    </div>  <!-- column for available burgers -->
+
+
+    <div class="col-sm-6"> <!-- column for devoured burgers -->
+      <h3> DEVOURED BURGERS </h3>
+      <ul style="list-style: none">
+        {{#each burgers}}
+          {{#if this.devoured}}
+            <li> {{this.id}} <span>.</span> {{this.burger_name}} </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    </div> <!-- closing column for devoured burgers -->
+  </div> <!-- closing row for list of burger -->
+
+  <div class="row text-center"> <!-- row for form to add new burgers -->
+    <form action="/" method="POST">
+
+      <div class="form-group">
+        <label for="newBurger">Burger Name:</label>
+        <input type="text" id="newBurger" name="name">
+        <button class="btn btn-primary" type="submit" name="button">Add Burger</button>
+      </div>
+    </form>
+  </div> <!-- closing row for form to add new burgers -->
+
+</div> <!-- closing container for whole page -->
